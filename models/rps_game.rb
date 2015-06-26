@@ -1,6 +1,7 @@
 class RPSGame
   attr_reader :type
 
+  @@computer_choice =
   class PlayTypeError < StandardError
   end
 
@@ -19,16 +20,14 @@ class RPSGame
 
   def computer_play
     selection = rand(3)
-    self.class.valid_types[selection]
+    @computer_move = self.class.valid_types[selection]
   end
 
   def won?
-    @computer_move = computer_play
     ((self.type == :rock) && (@computer_move == :scissors)) || ((self.type == :paper) && (@computer_move == :rock)) || ((self.type == :scissors) && (@computer_move == :paper))
   end
 
   def tied?
-    @computer_move = computer_play
     self.type == @computer_move ? true : false
   end
 
